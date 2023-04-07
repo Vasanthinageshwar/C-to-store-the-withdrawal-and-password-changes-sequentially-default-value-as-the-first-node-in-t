@@ -1,0 +1,139 @@
+Write a program in C++ to store the withdrawal and
+password changes sequentially (default value as the first
+node) in the above program using Linked List.
+
+
+Code:
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ATM
+{
+private :
+
+int bal = 30000 ;
+int pswd = 2111 ;
+struct node {
+int data;
+struct node *next;
+};
+
+public:
+struct node *head_w = NULL;
+struct node *head_p = NULL;
+
+void withdraw(){
+int c,data;
+
+cout&lt;&lt;&quot;\nEnter the amount you want to withdraw : &quot;;
+cin&gt;&gt;c;
+data = c;
+struct node *link = (struct node*) malloc(sizeof(struct node));
+struct node *current;
+link-&gt;data = data;
+link-&gt;next = NULL;
+if(head_w == NULL){
+head_w = link;
+}
+else{
+current = head_w;
+
+while(current-&gt;next != NULL)
+current = current-&gt;next;
+current-&gt;next = link;
+}
+bal = bal - c;
+cout&lt;&lt;&quot;\n Thank You for using My ATM, Please Collect Money \n&quot;;
+cout&lt;&lt;&quot;\n Your updated balance is :&quot;&lt;&lt;bal;
+
+}
+void change_pswd(){
+int a,b,data_1;
+cout&lt;&lt;&quot;\n Enter the old Password... \n&quot;;
+
+cin&gt;&gt;a;
+
+if(a == pswd){
+cout&lt;&lt;&quot;\n Enter the new password \n&quot;;
+cin&gt;&gt;b;
+data_1 = b;
+struct node *link_1 = (struct node*) malloc(sizeof(struct node));
+struct node *current_1;
+link_1-&gt;data = data_1;
+link_1-&gt;next = NULL;
+if(head_p == NULL){
+head_p = link_1;
+}
+else{
+current_1 = head_p;
+
+while(current_1-&gt;next != NULL)
+current_1 = current_1-&gt;next;
+current_1-&gt;next = link_1;
+}
+pswd = b;
+cout&lt;&lt;&quot;\n password changed \n&quot;;
+}
+
+}
+
+void display_w(){
+struct node *ptr = head_w;
+
+printf(&quot;Withdrawal :&quot;);
+
+while(ptr != NULL) {
+printf(&quot; %d =&gt;&quot;,ptr-&gt;data);
+ptr = ptr-&gt;next;
+}
+}
+void display_p(){
+struct node *ptr = head_p;
+
+printf(&quot;passwords :&quot;);
+
+while(ptr != NULL) {
+printf(&quot; %d =&gt;&quot;,ptr-&gt;data);
+ptr = ptr-&gt;next;
+}
+}
+
+};
+int main()
+{
+
+int key;
+ATM obj1;
+cout&lt;&lt;&quot;\n====================================================\n&quot;;
+cout&lt;&lt;&quot;\nWelcome to My Bank ATM\n&quot;;
+cout&lt;&lt;&quot;\nYour account balance is :20000\n&quot;;
+while(key != 5){
+cout&lt;&lt;&quot;\n Enter 1 to withdraw\n Enter 2 to change the password\n Enter
+3 to display the withdraw history\n Enter 4 to display the password change
+histort\n Enter 5 to exit\n\n&quot;;
+cin&gt;&gt;key;
+switch(key){
+case 1:
+obj1.withdraw();
+break;
+case 2:
+obj1.change_pswd();
+break;
+case 3:
+obj1.display_w();
+break;
+case 4:
+obj1.display_p();
+break;
+case 5:
+break;
+default:
+cout&lt;&lt;&quot;\n====================================================\n&quot;;
+
+cout&lt;&lt;&quot;\nWelcome to My Bank ATM\n&quot;;
+
+}
+}
+return 0;
+}
